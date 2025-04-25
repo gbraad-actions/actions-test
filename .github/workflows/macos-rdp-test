@@ -1,0 +1,27 @@
+name: macOS RDP
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+
+    runs-on: macos-latest
+    timeout-minutes: 9999
+
+    steps:
+
+      - name: Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_CLIENTID }}
+          oauth-secret: ${{ secrets.TAILSCALE_SECRET }}
+          tags: tag:actions
+
+      - name: Enable RDP
+        uses: gbraad-actions/enable-mac-remote@main
+  
+      - name: Hang around
+        if: ${{ always() }}
+        run: |
+          Start-Sleep -Seconds 21600
