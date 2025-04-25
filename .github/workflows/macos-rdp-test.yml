@@ -17,6 +17,8 @@ jobs:
           oauth-client-id: ${{ secrets.TAILSCALE_CLIENTID }}
           oauth-secret: ${{ secrets.TAILSCALE_SECRET }}
           tags: tag:actions
+          use-cache: 'true'
+          args: --ssh
 
       - name: Enable RDP
         uses: gbraad-actions/enable-mac-remote@main
@@ -26,4 +28,4 @@ jobs:
       - name: Hang around
         if: ${{ always() }}
         run: |
-          Start-Sleep -Seconds 21600
+          sleep infinity
