@@ -20,6 +20,8 @@ jobs:
 
       - name: Enable RDP
         uses: gbraad-actions/enable-mac-remote@main
+        with:
+          vnc_password: ${{ secrets.USER_PASSWORD }}
   
       - name: Hang around
         if: ${{ always() }}
