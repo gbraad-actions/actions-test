@@ -28,4 +28,4 @@ jobs:
       - name: Hang around
         if: ${{ always() }}
         run: |
-          sleep infinity
+          sleep 21600
