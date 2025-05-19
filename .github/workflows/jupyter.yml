@@ -1,0 +1,27 @@
+name: Test jupyter notebook
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tailscale
+        uses: gbraad-actions/tailscale-action@v1
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          args: --ssh --accept-dns=false --operator=runner
+          hostname: jupyter
+
+      - name: Install Jupyter
+        uses: gbraad-actions/jupyter-action@main
+
+      - name: Usage message
+        run: |
+          IP=`tailscale ip -4`
+          echo "Connect to https://${IP}:8888"
+
+      - name: Hang around
+        run: |
+          sleep infinity
