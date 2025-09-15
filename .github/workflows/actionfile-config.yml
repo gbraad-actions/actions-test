@@ -18,7 +18,6 @@ jobs:
       - name: Use variables
         run: |
           echo "$TEST_TEXT"
-        shell: bash
 
       - name: Use environment variables
         run: |
