@@ -1,0 +1,25 @@
+name: Test config from actionfile
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Config
+        uses: gbraad-actions/shared-config@actionfile
+        with:
+          config_file: "./actionfiles/config.md"
+    
+      - name: Use variables
+        run: |
+          echo "$TEST_TEXT"
+        shell: bash
+
+      - name: Use environment variables
+        run: |
+          echo "${{ env.TEST_TEXT }}"
